@@ -1,0 +1,40 @@
+{
+  "name": "photo-gallery",
+  "version": "1.0.0",
+  "description": "renders photo-gallery widget for Turntable web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -d --watch",
+    "start": "nodemon public/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tableturners/overview-service.git"
+  },
+  "author": "eliu390",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tableturners/overview-service/issues"
+  },
+  "homepage": "https://github.com/tableturners/overview-service#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "path": "^0.12.7",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  }
+}
