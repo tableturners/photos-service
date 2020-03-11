@@ -15,6 +15,6 @@ const get = (callback) => {
 };
 
 module.exports = {
-  get,
-
+  Place,
+  get
 }
