@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:3003', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/turntable', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const placeSchema = new mongoose.Schema({
   id: Number,
