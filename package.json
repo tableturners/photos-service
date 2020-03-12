@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/tableturners/overview-service#readme",
   "jest": {
-    "presets": ["react-native"],
+    "presets": [
+      "react-native"
+    ],
     "setupTestFrameworkScriptFile": "jest-enzyme",
     "testEnvironment": "enzyme",
     "testEnvironmentOptions": {
@@ -34,7 +36,8 @@
     "jquery": "^3.4.1",
     "mongoose": "^5.9.4",
     "path": "^0.12.7",
-    "react": "^16.13.0"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
@@ -43,7 +46,7 @@
     "babel-loader": "^8.0.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.1.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -52,7 +55,6 @@
     "jest": "^25.1.0",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
-    "react-dom": "^16.13.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11"
   }
