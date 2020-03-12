@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/turntable', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const placeSchema = new mongoose.Schema({
-  id: Number,
+  _id: Number,
   name: String,
   photos_food: [String],
   photos_building: [String],
@@ -11,8 +11,8 @@ const placeSchema = new mongoose.Schema({
 
 const Place = mongoose.model('Place', placeSchema);
 
-const get = (callback) => {
-  Place.find({}, (err, success) => {
+const get = (query = {}, callback) => {
+  Place.find(query, (err, success) => {
     (err) ? callback(err, null) : callback(null, success)
   });
 };

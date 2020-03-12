@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import axios from 'axios';
 import path from 'path';
-import Photo from './components/Photo.jsx';
+// import Photo from './components/Photo.jsx';
 
 console.log('hello tester');
 
@@ -19,9 +19,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    $.get('/photos', (data) => {
-      this.setState(data[0], () => console.log(this.state));
-    });
+    axios.get('/photos')
+      .then((response) => {
+        console.log(response.data);
+        this.setState(response.data[Math.floor(Math.random() * 10)]);
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -33,7 +36,7 @@ class App extends React.Component {
           {this.state.photos_food.map((url) => <img src={url} crossOrigin="anonymous" />)}
         </div>
         <div id="photos_building">
-        <h2>photos_building</h2>
+          <h2>photos_building</h2>
           {this.state.photos_building.map((url) => <img src={url} crossOrigin="anonymous" />)}
         </div>
       </div>

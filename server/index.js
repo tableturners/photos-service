@@ -16,3 +16,7 @@ app.get('/photos', (req, res) => {
     (err) ? res.send(err) : res.send(result)
   });
 });
+
+app.param(['id'], (req, res, next, value) => {
+  console.log('id GET received: ', value);
+});
