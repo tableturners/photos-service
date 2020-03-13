@@ -12,8 +12,12 @@ const placeSchema = new mongoose.Schema({
 const Place = mongoose.model('Place', placeSchema);
 
 const get = (query = {}, callback) => {
-  Place.find(query, (err, success) => {
-    (err) ? callback(err, null) : callback(null, success)
+  Place.find(query, { __v: 0 }, (err, success) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, success[0]);
+    }
   });
 };
 

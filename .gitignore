@@ -2,3 +2,5 @@ node_modules/
 yarn-error.log
 
 ./public/bundle.js
+photos/
+.DS_Store

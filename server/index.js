@@ -12,11 +12,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}.`));
 
 app.get('/photos', (req, res) => {
-  db.get((err, result) => {
-    (err) ? res.send(err) : res.send(result)
+  db.get({ _id: req.query.id }, (err, success) => {
+    if (err) {
+      console.log('err: ', err);
+    } else {
+      res.send(success);
+    }
   });
-});
-
-app.param(['id'], (req, res, next, value) => {
-  console.log('id GET received: ', value);
 });

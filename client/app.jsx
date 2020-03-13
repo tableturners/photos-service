@@ -3,28 +3,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import path from 'path';
-// import Photo from './components/Photo.jsx';
-
-console.log('hello tester');
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: undefined,
+      _id: undefined,
       name: '',
       photos_food: [],
       photos_building: []
     };
   }
 
+  // makes API call with random restaurant ID between 1-100
   componentDidMount() {
-    axios.get('/photos')
+    let id = Math.floor(Math.random() * 100);
+    console.log(id);
+    axios.get('/photos/?id=' + id)
       .then((response) => {
         console.log(response.data);
-        this.setState(response.data[Math.floor(Math.random() * 10)]);
+        this.setState(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch();
   }
 
   render() {
@@ -33,11 +33,11 @@ class App extends React.Component {
         <h1>{this.state.name}'s Photos</h1>
         <div id="photos_food">
           <h2>photos_food</h2>
-          {this.state.photos_food.map((url) => <img src={url} crossOrigin="anonymous" />)}
+          {this.state.photos_food.map((url) => <img src={url}/>)}
         </div>
         <div id="photos_building">
           <h2>photos_building</h2>
-          {this.state.photos_building.map((url) => <img src={url} crossOrigin="anonymous" />)}
+          {this.state.photos_building.map((url) => <img src={url}/>)}
         </div>
       </div>
     )
