@@ -3,12 +3,11 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, mount, render, configure } from 'enzyme';
-import axios from 'axios';
 import App from '../client/App';
 
 configure({ adapter: new Adapter() });
 
-describe('Unit Tests', () => {
+describe('render + componentDidMount', () => {
 
   test('should render the app component on the screen', () => {
     let wrapper = shallow(<App />);
@@ -24,8 +23,18 @@ describe('Unit Tests', () => {
     expect(mockFn).toHaveBeenCalled();
   });
 
-  test('should make axios get request with a random id', () => {
+});
 
+describe('getPlace', () => {
+  test('getPlace should make request with input id and return correct output', () => {
+    let wrapper = shallow(<App />);
+    wrapper.instance().getPlace(1)
+      .then(response => {
+        expect(response.data._id).toBe(1);
+        expect(response.data.photos_food).toBeTruthy();
+        expect(response.data.photos_food[0]).toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/1_food_1");
+        expect(response.data.photos_food[0]).not.toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/1_food_1");
+      })
+      .catch(err => {});
   });
-
 });
