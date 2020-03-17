@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   max-width: 650px;
@@ -10,94 +10,96 @@ export const Wrapper = styled.div`
   margin: auto;
 `;
 
-export const SmallColumn = styled.div`
+const SmallColumn = styled.div`
   flex: 2;
   flex-flow: column wrap;
+  align-items: center;
 `;
 
-export const MediumColumn = styled.div`
+const MediumColumn = styled.div`
   flex: 3;
   flex-flow: column wrap;
+  align-items: center;
 `;
 
-export const LargeColumn = styled.div`
+const LargeColumn = styled.div`
   flex: 6;
+  align-items: center;
 `;
 
-export const Picture = styled.div`
+const Picture = styled.div`
   flex: 1;
 `;
 
-export const Gallery = (props) => (
-  <Wrapper>
+const Gallery = (props) => (
+  < Wrapper>
+    <div id='wrapper'>
+      <MediumColumn>
+        <div className='medium-column'>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_building[0]} height={150} width={150} />
+            </div>
+          </Picture>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_building[1]} height={150} width={150} />
+            </div>
+          </Picture>
+        </div>
+      </MediumColumn>
 
-    <MediumColumn>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={150}
-      width={150}/>
-      </Picture>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={150}
-      width={150}/>
-      </Picture>
-    </MediumColumn>
+      <LargeColumn>
+        <div className='large-column'>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_building[2]} height={300} width={300} />
+            </div>
+          </Picture>
+        </div>
+      </LargeColumn>
 
-    <LargeColumn>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={300}
-      width={300}/>
-      </Picture>
-    </LargeColumn>
+      <SmallColumn>
+        <div className='small-column'>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler} >
+              <img src={props.place.photos_food[0]} height={100} width={100} />
+            </div>
+          </Picture>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_food[1]} height={100} width={100} />
+            </div>
+          </Picture>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_food[2]} height={100} width={100} />
+            </div>
+          </Picture>
+        </div>
+      </SmallColumn>
 
-    <SmallColumn>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-    </SmallColumn>
-
-    <SmallColumn>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-      <Picture><img
-      onClick={props.clickHandler}
-      src={'https://cdn0.iconfinder.com/data/icons/ecology-1/110/Ladybug-512.png'}
-      height={100}
-      width={100}/>
-      </Picture>
-    </SmallColumn>
-
-  </Wrapper>
+      <SmallColumn>
+        <div className='small-column'>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_food[3]} height={100} width={100} />
+            </div>
+          </Picture>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_food[4]} height={100} width={100} />
+            </div>
+          </Picture>
+          <Picture>
+            <div className='picture' onClick={props.clickHandler}>
+              <img src={props.place.photos_food[5]} height={100} width={100} />
+            </div>
+          </Picture>
+        </div>
+      </SmallColumn>
+    </div>
+  </Wrapper >
 )
 
 export default Gallery;
