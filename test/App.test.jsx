@@ -3,11 +3,15 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, mount, render, configure } from 'enzyme';
+import styled from 'styled-components';
+
 import App from '../client/App';
+import { Gallery } from '../client/Gallery';
+import Viewer from '../client/Viewer';
 
 configure({ adapter: new Adapter() });
 
-describe('render + componentDidMount', () => {
+describe('App lifecycle', () => {
 
   test('should render the app component on the screen', () => {
     let wrapper = shallow(<App />);
@@ -23,6 +27,12 @@ describe('render + componentDidMount', () => {
     expect(mockFn).toHaveBeenCalled();
   });
 
+  test('should render Gallery and Viewer components on load', () => {
+    let wrapper = shallow(<App />);
+    expect(wrapper.find(Gallery)).toBeTruthy();
+    expect(wrapper.find(Viewer)).toBeTruthy();
+  });
+
 });
 
 describe('getPlace', () => {
@@ -33,7 +43,6 @@ describe('getPlace', () => {
         expect(response.data._id).toBe(1);
         expect(response.data.photos_food).toBeTruthy();
         expect(response.data.photos_food[0]).toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/1_food_1");
-        expect(response.data.photos_food[0]).not.toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/1_food_1");
       })
       .catch(err => {});
   });

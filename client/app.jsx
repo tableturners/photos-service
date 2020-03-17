@@ -4,15 +4,22 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import path from 'path';
 
+import { Gallery } from './Gallery.jsx';
+import Viewer from './Viewer.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: undefined,
-      name: '',
-      photos_food: [],
-      photos_building: []
+      place: {
+        _id: undefined,
+        name: '',
+        photos_food: [],
+        photos_building: []
+      },
+      showViewer: false
     };
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
   // makes API call with random restaurant ID between 1-100
@@ -23,27 +30,24 @@ class App extends React.Component {
   getPlace(id) {
     return axios.get('/photos/?id=' + id)
       .then(response => {
-        this.setState(response.data);
+        this.setState({ place: response.data });
       })
-      .catch((err) => {});
+      .catch((err) => { });
+  }
+
+  clickHandler() {
+    return null;
   }
 
   render() {
     return (
-      <div>
-        <h1>{this.state.name}'s Photos</h1>
-        <div id="photos_food">
-          <h1>photos_food</h1>
-          {this.state.photos_food.map(url => <img src={url}/>)}
-        </div>
-        <div id="photos_building">
-          <h1>photos_building</h1>
-          {this.state.photos_building.map(url => <img src={url}/>)}
-        </div>
+      <div id="container">
+        <Gallery place={this.state.place} />
+        <Viewer show={this.state.showViewer} place={this.state.place} />
       </div>
     )
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 export default App;
