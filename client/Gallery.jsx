@@ -37,12 +37,12 @@ const Gallery = (props) => (
       <MediumColumn>
         <div className='medium-column'>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='building,0' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_building[0]} height={150} width={150} />
             </div>
           </Picture>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='building,1' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_building[1]} height={150} width={150} />
             </div>
           </Picture>
@@ -52,7 +52,7 @@ const Gallery = (props) => (
       <LargeColumn>
         <div className='large-column'>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='building,2' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_building[2]} height={300} width={300} />
             </div>
           </Picture>
@@ -62,17 +62,17 @@ const Gallery = (props) => (
       <SmallColumn>
         <div className='small-column'>
           <Picture>
-            <div className='picture' onClick={props.clickHandler} >
+            <div id='food,0' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_food[0]} height={100} width={100} />
             </div>
           </Picture>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='food,1' className='picture' onClick={props.clickHandler}>
               <img src={props.place.photos_food[1]} height={100} width={100} />
             </div>
           </Picture>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='food,2' className='picture' onClick={props.clickHandler}>
               <img src={props.place.photos_food[2]} height={100} width={100} />
             </div>
           </Picture>
@@ -82,17 +82,17 @@ const Gallery = (props) => (
       <SmallColumn>
         <div className='small-column'>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='food,3' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_food[3]} height={100} width={100} />
             </div>
           </Picture>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='food,4' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_food[4]} height={100} width={100} />
             </div>
           </Picture>
           <Picture>
-            <div className='picture' onClick={props.clickHandler}>
+            <div id='food,5' className='picture' onClick={props.clickHandler} >
               <img src={props.place.photos_food[5]} height={100} width={100} />
             </div>
           </Picture>

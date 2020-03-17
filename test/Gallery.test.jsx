@@ -17,6 +17,7 @@ const testPlace = {
 }
 
 describe('Gallery lifecycle', () => {
+
   test('should render a Wrapper component', () => {
     let wrap = render(<Gallery place={testPlace} />);
     expect(wrap.find('#wrapper')).toHaveLength(1);
@@ -41,13 +42,16 @@ describe('Gallery lifecycle', () => {
     let wrap = render(<Gallery place={testPlace} />);
     expect(wrap.find('.picture')).toHaveLength(9);
   });
+
 });
 
 describe('Click handling', () => {
+
   test('should call props.clickHandler when clicked', () => {
     let mockFn = jest.fn();
     let wrap = shallow(<Gallery place={testPlace} clickHandler={mockFn} />);
     wrap.find('.picture').first().simulate('click');
     expect(mockFn).toHaveBeenCalled();
   });
+
 });

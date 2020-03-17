@@ -62,3 +62,13 @@ describe('getPlace', () => {
       .catch(err => { });
   });
 });
+
+describe('clickHandler', () => {
+  test('should capture clicked element id', () => {
+    let wrap = shallow(<App />);
+    wrap.instance().clickHandler = (event) => {
+      expect(event.target.id).toBe('building,0');
+    }
+    wrap.find('.picture').first().simulate('click');
+  });
+});
