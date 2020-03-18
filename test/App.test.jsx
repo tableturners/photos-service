@@ -116,14 +116,10 @@ describe('keypressHandler', () => {
     wrap.find(Gallery).dive().find('.picture').first()
       .simulate('click', { target: { id: 'picture-0' } });
     expect(wrap.state('showViewer')).toBe(true);
-
-    wrap.simulate('keydown', { key: 'ArrowLeft' });
+    wrap.instance().keypressHandler({ key: 'ArrowLeft' });
     expect(mockFn).toHaveBeenCalledWith('left');
-
-    // wrap.instance().keypressHandler({ key: 'ArrowLeft' });
-    // expect(mockFn).toHaveBeenCalledWith('left');
-    // wrap.instance().keypressHandler({ key: 'ArrowRight' });
-    // expect(mockFn).toHaveBeenCalledWith('right');
+    wrap.instance().keypressHandler({ key: 'ArrowRight' });
+    expect(mockFn).toHaveBeenCalledWith('right');
   });
 });
 
