@@ -5,8 +5,7 @@ mongoose.connect('mongodb://localhost/turntable', { useNewUrlParser: true, useUn
 const placeSchema = new mongoose.Schema({
   _id: Number,
   name: String,
-  photos_food: [String],
-  photos_building: [String],
+  urls: [String],
 });
 
 const Place = mongoose.model('Place', placeSchema);
