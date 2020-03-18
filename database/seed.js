@@ -1,21 +1,17 @@
 const faker = require('faker');
 const db = require('./index.js');
 
-
 const seedOne = (index) => {
-  let seedFood = [];
-  let seedBuilding = [];
+  const seed = [];
 
-  for (let i = 1; i < 11; i++) {
-    seedFood.push(`https://eric-liu-turntable.s3-us-west-1.amazonaws.com/${index}_food_${i}`);
-    seedBuilding.push(`https://eric-liu-turntable.s3-us-west-1.amazonaws.com/${index}_building_${i}`);
+  for (let i = 0; i < 10; i++) {
+    seed.push(`https://eric-liu-turntable.s3-us-west-1.amazonaws.com/${index}_${i}`);
   }
 
   db.Place.create({
     _id: index,
     name: faker.commerce.productName(),
-    photos_food: seedFood, // stores AWS S3 url
-    photos_building: seedBuilding,
+    urls: seed,
   }, (err, success) => {
     if (err) {
       console.log(err);
@@ -25,6 +21,6 @@ const seedOne = (index) => {
   });
 };
 
-for (let i = 1; i < 101; i++) { // restaurant id
+for (let i = 0; i < 100; i++) { // restaurant id
   seedOne(i);
 }

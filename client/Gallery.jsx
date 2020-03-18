@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   max-width: 650px;
   max-height: 300px;
   margin: auto;
+  user-select: none;
 `;
 
 const SmallColumn = styled.div`
@@ -29,76 +30,68 @@ const LargeColumn = styled.div`
 
 const Picture = styled.div`
   flex: 1;
+  cursor: pointer;
 `;
 
 const Gallery = (props) => (
-  < Wrapper>
-    <div id='wrapper'>
+  <Wrapper>
+
+    <div className='medium-column'>
       <MediumColumn>
-        <div className='medium-column'>
-          <Picture>
-            <div id='building,0' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_building[0]} height={150} width={150} />
-            </div>
-          </Picture>
-          <Picture>
-            <div id='building,1' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_building[1]} height={150} width={150} />
-            </div>
-          </Picture>
-        </div>
+        <Picture>
+          <img id='picture-0' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[0]} height={150} width={150} />
+        </Picture>
+        <Picture>
+          <img id='picture-1' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[1]} height={150} width={150} />
+        </Picture>
       </MediumColumn>
-
-      <LargeColumn>
-        <div className='large-column'>
-          <Picture>
-            <div id='building,2' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_building[2]} height={300} width={300} />
-            </div>
-          </Picture>
-        </div>
-      </LargeColumn>
-
-      <SmallColumn>
-        <div className='small-column'>
-          <Picture>
-            <div id='food,0' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_food[0]} height={100} width={100} />
-            </div>
-          </Picture>
-          <Picture>
-            <div id='food,1' className='picture' onClick={props.clickHandler}>
-              <img src={props.place.photos_food[1]} height={100} width={100} />
-            </div>
-          </Picture>
-          <Picture>
-            <div id='food,2' className='picture' onClick={props.clickHandler}>
-              <img src={props.place.photos_food[2]} height={100} width={100} />
-            </div>
-          </Picture>
-        </div>
-      </SmallColumn>
-
-      <SmallColumn>
-        <div className='small-column'>
-          <Picture>
-            <div id='food,3' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_food[3]} height={100} width={100} />
-            </div>
-          </Picture>
-          <Picture>
-            <div id='food,4' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_food[4]} height={100} width={100} />
-            </div>
-          </Picture>
-          <Picture>
-            <div id='food,5' className='picture' onClick={props.clickHandler} >
-              <img src={props.place.photos_food[5]} height={100} width={100} />
-            </div>
-          </Picture>
-        </div>
-      </SmallColumn>
     </div>
+
+    <div className='large-column'>
+      <LargeColumn>
+        <Picture>
+          <img id='picture-2' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[2]} height={300} width={300} />
+        </Picture>
+      </LargeColumn>
+    </div>
+
+    <div className='small-column'>
+      <SmallColumn>
+        <Picture>
+          <img id='picture-3' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[3]} height={100} width={100} />
+        </Picture>
+        <Picture>
+          <img id='picture-4' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[4]} height={100} width={100} />
+        </Picture>
+        <Picture>
+          <img id='picture-5' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[5]} height={100} width={100} />
+        </Picture >
+      </SmallColumn >
+    </div >
+
+    <div className='small-column'>
+      <SmallColumn>
+        <Picture>
+          <img id='picture-6' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[6]} height={100} width={100} />
+        </Picture>
+        <Picture>
+          <img id='picture-7' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[7]} height={100} width={100} />
+        </Picture>
+        <Picture>
+          <img id='picture-8' className='picture' onClick={props.clickHandler}
+            src={props.place.urls[8]} height={100} width={100} />
+        </Picture >
+      </SmallColumn >
+    </div >
+
   </Wrapper >
 )
 

@@ -40,8 +40,7 @@ describe('App lifecycle', () => {
       place: {
         _id: 1,
         name: 'test',
-        photos_food: ['a'],
-        photos_building: ['b']
+        urls: ['a', 'b'],
       },
     }, () => {
       expect(wrap.state('place').name).toEqual('test');
@@ -51,24 +50,16 @@ describe('App lifecycle', () => {
 });
 
 describe('getPlace', () => {
+
   test('getPlace should make request with input id and return correct output', () => {
     let wrap = shallow(<App />);
     wrap.instance().getPlace(1)
       .then(response => {
         expect(response.data._id).toBe(1);
-        expect(response.data.photos_food).toBeTruthy();
-        expect(response.data.photos_food[0]).toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/1_food_1");
+        expect(response.data.urls).toBeTruthy();
+        expect(response.data.urls[0]).toBe("https://eric-liu-turntable.s3-us-west-1.amazonaws.com/0_0");
       })
       .catch(err => { });
   });
-});
 
-describe('clickHandler', () => {
-  test('should capture clicked element id', () => {
-    let wrap = shallow(<App />);
-    wrap.instance().clickHandler = (event) => {
-      expect(event.target.id).toBe('building,0');
-    }
-    wrap.find('.picture').first().simulate('click');
-  });
 });
