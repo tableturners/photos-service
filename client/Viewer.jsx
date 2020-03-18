@@ -13,7 +13,7 @@ const Background = styled.div`
   opacity: 0.95;
 `;
 
-const X = styled.div`
+const CloseButton = styled.div`
   top: 45px;
   right: 35px;
   z-index: 2;
@@ -36,20 +36,20 @@ const Display = styled.div`
 const LeftArrow = styled.div`
   flex: 1;
   user-select: none;
-  opacity: 0.8;
+  opacity: 0.6;
   cursor: pointer;
   &:hover {
-    opacity: 0.6;
+    opacity: 0.4;
   }
 `;
 
 const RightArrow = styled.div`
   flex: 1;
   user-select: none;
-  opacity: 0.8;
+  opacity: 0.6;
   cursor: pointer;
   &:hover {
-    opacity: 0.6;
+    opacity: 0.4;
   }
 `;
 
@@ -66,23 +66,23 @@ const Viewer = (props) => {
       <div id="viewer-wrapper">
         <Background>
           <img id='viewer-background' height={'100%'} width={'100%'} onClick={props.buttonHandler}
-            src='https://www.dlf.pt/png/big/9/92021_black-overlay-png.jpg' />
+            src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/viewer_background.jpg' />
         </Background>
-        <X>
+        <CloseButton>
           <img id='close-button' height={20} width={20} onClick={props.buttonHandler}
-            src='https://image.flaticon.com/icons/svg/458/458595.svg' />
-        </X>
+            src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/close_button.svg' />
+        </CloseButton>
         <Display>
           <LeftArrow>
             <img id='left-arrow' height={40} width={40} onClick={props.buttonHandler}
-              src='https://www.materialui.co/materialIcons/hardware/keyboard_arrow_left_grey_192x192.png' />
+              src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/left_arrow.png' />
           </LeftArrow>
           <Image>
             <img id='viewer-image' src={props.place.urls[props.currentIndex]} height={500} width={500} />
           </Image>
           <RightArrow>
             <img id='right-arrow' height={40} width={40} onClick={props.buttonHandler}
-              src='https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png' />
+              src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/right_arrow.png' />
           </RightArrow>
         </Display>
       </div>
