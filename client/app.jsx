@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import path from 'path';
 
 import Gallery from './Gallery.jsx';
 import Viewer from './Viewer.jsx';
@@ -21,31 +19,31 @@ class App extends React.Component {
     };
     this.clickHandler = this.clickHandler.bind(this);
     this.buttonHandler = this.buttonHandler.bind(this);
-    this.keypressHandler = this.keypressHandler.bind(this);
-    this.advanceDisplay = this.advanceDisplay.bind(this);
   }
 
-  // makes API call with random restaurant ID between 0-99
+  // calls getPlace with random id in [0, 99], adds keydown listener
   componentDidMount() {
     this.getPlace(Math.floor(Math.random() * 100));
+    document.addEventListener('keydown', this.keypressHandler.bind(this));
   }
 
+  // given input id, makes GET request to server and sets state.place equal to response
   getPlace(id) {
-    return axios.get('/photos/?id=' + id)
-      .then(response => {
+    return axios.get(`/photos/?id=${id}`)
+      .then((response) => {
         this.setState({ place: response.data });
       })
-      .catch((err) => { });
+      .catch(() => {});
   }
 
+  // captures Gallery click events and opens Viewer
   clickHandler(event) {
-    event.preventDefault();
-    this.setState({ showViewer: true, currentIndex: Number(event.target.id.split('-')[1]) }, () => console.log(this.state));
+    this.setState({ showViewer: true, currentIndex: Number(event.target.id.split('-')[1]) });
   }
 
+  // captures "button" image clicks in Viewer
   buttonHandler(event) {
-    event.preventDefault();
-    let eventId = event.target.id;
+    const eventId = event.target.id;
     if (eventId === 'left-arrow') {
       this.advanceDisplay('left');
     } else if (eventId === 'right-arrow') {
@@ -57,12 +55,20 @@ class App extends React.Component {
     }
   }
 
+  // captures key presses in Viewer
   keypressHandler(event) {
     if (this.state.showViewer) {
-
+      if (event.key === 'ArrowLeft') {
+        this.advanceDisplay('left');
+      } else if (event.key === 'ArrowRight') {
+        this.advanceDisplay('right');
+      } else if (event.key === 'Escape') {
+        this.setState({ showViewer: false });
+      }
     }
   }
 
+  // changes displayed image in Viewer based on button/key presses
   advanceDisplay(string) {
     if (string === 'left' && this.state.currentIndex > 0) {
       this.setState({ currentIndex: this.state.currentIndex - 1 });
@@ -75,10 +81,14 @@ class App extends React.Component {
     return (
       <div id="container">
         <Gallery place={this.state.place} clickHandler={this.clickHandler} />
-        <Viewer show={this.state.showViewer} place={this.state.place}
-          currentIndex={this.state.currentIndex} buttonHandler={this.buttonHandler} />
+        <Viewer
+          show={this.state.showViewer}
+          place={this.state.place}
+          currentIndex={this.state.currentIndex}
+          buttonHandler={this.buttonHandler}
+        />
       </div>
-    )
+    );
   }
 }
 
