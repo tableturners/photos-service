@@ -12,23 +12,33 @@ const testPlace = {
 };
 
 describe('Gallery lifecycle', () => {
+  let wrap;
+  beforeEach(() => {
+    wrap = shallow(<Gallery place={testPlace} />);
+  });
+
+  test('should render gallery when place has urls', () => {
+    expect(wrap.find('#gallery')).toHaveLength(1);
+  });
+
+  test('should render nothing when no urls given', () => {
+    wrap.setProps({ place: { _id: 0, name: '', urls: [] } });
+    expect(wrap.find('#gallery')).toHaveLength(0);
+  });
+
   test('should render 2 SmallColumn components', () => {
-    const wrap = shallow(<Gallery place={testPlace} />);
     expect(wrap.find('.small-column')).toHaveLength(2);
   });
 
   test('should render a MediumColumn component', () => {
-    const wrap = shallow(<Gallery place={testPlace} />);
     expect(wrap.find('.medium-column')).toHaveLength(1);
   });
 
   test('should render a LargeColumn component', () => {
-    const wrap = shallow(<Gallery place={testPlace} />);
     expect(wrap.find('.large-column')).toHaveLength(1);
   });
 
   test('should render 9 Picture components', () => {
-    const wrap = shallow(<Gallery place={testPlace} />);
     expect(wrap.find('.picture')).toHaveLength(9);
   });
 });

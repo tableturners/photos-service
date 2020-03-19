@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -31,74 +30,138 @@ const LargeColumn = styled.div`
 const Picture = styled.div`
   flex: 1;
   cursor: pointer;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
 `;
 
-const Gallery = (props) => {
-  if (props.place.urls) {
-    return (
-      <div id='gallery'>
-        <h1 align='center'>{props.place.urls.length} Photos</h1>
-        <Wrapper>
-          <div className='medium-column'>
-            <MediumColumn>
-              <Picture>
-                <img id='picture-0' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[0]} height={150} width={150} />
-              </Picture>
-              <Picture>
-                <img id='picture-1' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[1]} height={150} width={150} />
-              </Picture>
-            </MediumColumn>
-          </div>
+const Gallery = ({ place, clickHandler }) => (
+  (place.urls.length) ? (
+    <div id="gallery">
+      <h1 align="center">{place.urls.length} Photos</h1>
+      <Wrapper>
+        <div className="medium-column">
+          <MediumColumn>
+            <Picture>
+              <img
+                id="picture-0"
+                alt={place.name}
+                height={150}
+                width={150}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[0]}
+              />
+            </Picture>
+            <Picture>
+              <img
+                id="picture-1"
+                alt={place.name}
+                height={150}
+                width={150}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[1]}
+              />
+            </Picture>
+          </MediumColumn>
+        </div>
 
-          <div className='large-column'>
-            <LargeColumn>
-              <Picture>
-                <img id='picture-2' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[2]} height={300} width={300} />
-              </Picture>
-            </LargeColumn>
-          </div>
+        <div className="large-column">
+          <LargeColumn>
+            <Picture>
+              <img
+                id="picture-2"
+                alt={place.name}
+                height={300}
+                width={300}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[2]}
+              />
+            </Picture>
+          </LargeColumn>
+        </div>
 
-          <div className='small-column'>
+        <div className="small-column">
+          <SmallColumn>
+            <Picture>
+              <img
+                id="picture-3"
+                alt={place.name}
+                height={100}
+                width={100}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[3]}
+              />
+            </Picture>
+            <Picture>
+              <img
+                id="picture-4"
+                alt={place.name}
+                height={100}
+                width={100}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[4]}
+              />
+            </Picture>
+            <Picture>
+              <img
+                id="picture-5"
+                alt={place.name}
+                height={100}
+                width={100}
+                className="picture"
+                onClick={clickHandler}
+                src={place.urls[5]}
+              />
+            </Picture>
+          </SmallColumn>
+        </div>
+
+        <div className="small-column">
             <SmallColumn>
               <Picture>
-                <img id='picture-3' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[3]} height={100} width={100} />
+                <img
+                  id="picture-6"
+                  alt={place.name}
+                  height={100}
+                  width={100}
+                  className="picture"
+                  onClick={clickHandler}
+                  src={place.urls[6]}
+                />
               </Picture>
               <Picture>
-                <img id='picture-4' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[4]} height={100} width={100} />
+                <img
+                  id="picture-7"
+                  alt={place.name}
+                  height={100}
+                  width={100}
+                  className="picture"
+                  onClick={clickHandler}
+                  src={place.urls[7]}
+                />
               </Picture>
               <Picture>
-                <img id='picture-5' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[5]} height={100} width={100} />
-              </Picture >
-            </SmallColumn >
-          </div >
+                <img
+                  id="picture-8"
+                  alt={place.name}
+                  height={100}
+                  width={100}
+                  className="picture"
+                  onClick={clickHandler}
+                  src={place.urls[8]}
+                />
+              </Picture>
+            </SmallColumn>
+          </div>
 
-          <div className='small-column'>
-            <SmallColumn>
-              <Picture>
-                <img id='picture-6' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[6]} height={100} width={100} />
-              </Picture>
-              <Picture>
-                <img id='picture-7' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[7]} height={100} width={100} />
-              </Picture>
-              <Picture>
-                <img id='picture-8' className='picture' onClick={props.clickHandler}
-                  src={props.place.urls[8]} height={100} width={100} />
-              </Picture >
-            </SmallColumn >
-          </div >
-
-        </Wrapper >
-      </div>
-    )
-  }
-}
+      </Wrapper>
+    </div>
+  ) : (null)
+);
 
 export default Gallery;

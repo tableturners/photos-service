@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import path from 'path';
 
 import Gallery from './Gallery.jsx';
 import Viewer from './Viewer.jsx';
@@ -19,6 +17,8 @@ class App extends React.Component {
       showViewer: false,
       currentIndex: null,
     };
+    this.clickHandler = this.clickHandler.bind(this);
+    this.buttonHandler = this.buttonHandler.bind(this);
   }
 
   // calls getPlace with random id in [0, 99], adds keydown listener
@@ -29,11 +29,11 @@ class App extends React.Component {
 
   // given input id, makes GET request to server and sets state.place equal to response
   getPlace(id) {
-    return axios.get('/photos/?id=' + id)
-      .then(response => {
+    return axios.get(`/photos/?id=${id}`)
+      .then((response) => {
         this.setState({ place: response.data });
       })
-      .catch((err) => { });
+      .catch(() => {});
   }
 
   // captures Gallery click events and opens Viewer
@@ -43,7 +43,7 @@ class App extends React.Component {
 
   // captures "button" image clicks in Viewer
   buttonHandler(event) {
-    let eventId = event.target.id;
+    const eventId = event.target.id;
     if (eventId === 'left-arrow') {
       this.advanceDisplay('left');
     } else if (eventId === 'right-arrow') {
@@ -80,13 +80,17 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        <Gallery place={this.state.place} clickHandler={this.clickHandler.bind(this)} />
-        <Viewer show={this.state.showViewer} place={this.state.place}
-          currentIndex={this.state.currentIndex} buttonHandler={this.buttonHandler.bind(this)} />
+        <Gallery place={this.state.place} clickHandler={this.clickHandler} />
+        <Viewer
+          show={this.state.showViewer}
+          place={this.state.place}
+          currentIndex={this.state.currentIndex}
+          buttonHandler={this.buttonHandler}
+        />
       </div>
-    )
+    );
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 export default App;

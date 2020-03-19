@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -33,7 +34,7 @@ const Display = styled.div`
   align-items: center;
 `;
 
-const LeftArrow = styled.div`
+const Arrow = styled.div`
   flex: 1;
   user-select: none;
   opacity: 0.6;
@@ -43,14 +44,10 @@ const LeftArrow = styled.div`
   }
 `;
 
-const RightArrow = styled.div`
+const InactiveArrow = styled.div`
   flex: 1;
   user-select: none;
-  opacity: 0.6;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.4;
-  }
+  opacity: 0.2;
 `;
 
 const Image = styled.div`
@@ -60,36 +57,88 @@ const Image = styled.div`
   margin: 22px;
 `;
 
-const Viewer = (props) => {
-  if (props.show) {
-    return (
-      <div id="viewer-wrapper">
-        <Background>
-          <img id='viewer-background' height={'100%'} width={'100%'} onClick={props.buttonHandler}
-            src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/viewer_background.jpg' />
-        </Background>
-        <CloseButton>
-          <img id='close-button' height={20} width={20} onClick={props.buttonHandler}
-            src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/close_button.svg' />
-        </CloseButton>
-        <Display>
-          <LeftArrow>
-            <img id='left-arrow' height={40} width={40} onClick={props.buttonHandler}
-              src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/left_arrow.png' />
-          </LeftArrow>
-          <Image>
-            <img id='viewer-image' src={props.place.urls[props.currentIndex]} height={500} width={500} />
-          </Image>
-          <RightArrow>
-            <img id='right-arrow' height={40} width={40} onClick={props.buttonHandler}
-              src='https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/right_arrow.png' />
-          </RightArrow>
-        </Display>
-      </div>
-    )
-  } else {
-    return null;
-  }
-}
+const Viewer = ({ show, place, currentIndex, buttonHandler }) => (
+  (show) ? (
+    <div id="viewer-wrapper">
+      <Background>
+        <img
+          id="viewer-background"
+          alt=""
+          height="100%"
+          width="100%"
+          onClick={buttonHandler}
+          src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/viewer_background.jpg"
+        />
+      </Background>
+      <CloseButton>
+        <img
+          id="close-button"
+          alt=""
+          height={20}
+          width={20}
+          onClick={buttonHandler}
+          src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/close_button.svg"
+        />
+      </CloseButton>
+      <Display>
+        {(currentIndex === 0) ? (
+          <InactiveArrow>
+            <img
+              id="inactive-left-arrow"
+              alt=""
+              height="45"
+              width="45"
+              onClick={buttonHandler}
+              src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/left_arrow.png"
+            />
+          </InactiveArrow>
+        ) : (
+          <Arrow>
+            <img
+              id="left-arrow"
+              alt=""
+              height="45"
+              width="45"
+              onClick={buttonHandler}
+              src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/left_arrow.png"
+            />
+          </Arrow>
+        )}
+        <Image>
+          <img
+            id="viewer-image"
+            alt=""
+            height="500"
+            width="500"
+            src={place.urls[currentIndex]}
+          />
+        </Image>
+        {(currentIndex === place.urls.length - 1) ? (
+          <InactiveArrow>
+            <img
+              id="inactive-right-arrow"
+              alt=""
+              height="45"
+              width="45"
+              onClick={buttonHandler}
+              src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/right_arrow.png"
+            />
+          </InactiveArrow>
+        ) : (
+          <Arrow>
+            <img
+              id="right-arrow"
+              alt=""
+              height="45"
+              width="45"
+              onClick={buttonHandler}
+              src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/right_arrow.png"
+            />
+          </Arrow>
+        )}
+      </Display>
+    </div>
+  ) : (null)
+);
 
 export default Viewer;

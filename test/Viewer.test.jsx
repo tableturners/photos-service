@@ -73,3 +73,17 @@ describe('Button handling', () => {
     });
   });
 });
+
+describe('Arrow button state', () => {
+  test('should return inactive left arrow when viewing first image', () => {
+    const wrap = shallow(<Viewer show place={testPlace} currentIndex={0} />);
+    expect(wrap.find('#inactive-left-arrow')).toHaveLength(1);
+    expect(wrap.find('#left-arrow')).toHaveLength(0);
+  });
+
+  test('should return inactive right arrow when viewing last image', () => {
+    const wrap = shallow(<Viewer show place={testPlace} currentIndex={testPlace.urls.length - 1} />);
+    expect(wrap.find('#inactive-right-arrow')).toHaveLength(1);
+    expect(wrap.find('#right-arrow')).toHaveLength(0);
+  });
+});
