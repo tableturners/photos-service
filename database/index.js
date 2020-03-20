@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/turntable', { useNewUrlParser: true, useUn
 const placeSchema = new mongoose.Schema({
   _id: Number,
   name: String,
-  urls: [String],
+  pics: [{}] // { url: String, username: String, date: String }
 });
 
 const Place = mongoose.model('Place', placeSchema);
@@ -22,5 +22,5 @@ const get = (query = {}, callback) => {
 
 module.exports = {
   Place,
-  get,
+  get
 };

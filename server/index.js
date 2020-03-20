@@ -13,10 +13,6 @@ app.listen(PORT, () => console.log(`Server is listening on port ${PORT}.`));
 
 app.get('/photos', (req, res) => {
   db.get({ _id: req.query.id }, (err, success) => {
-    if (err) {
-      console.log('err: ', err);
-    } else {
-      res.send(success);
-    }
+    (err) ? console.log('err: ', err) : res.send(success);
   });
 });

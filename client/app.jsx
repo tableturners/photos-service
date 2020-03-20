@@ -10,12 +10,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       place: {
-        _id: undefined,
-        name: '',
-        urls: [],
+        _id: 0,
+        pics: [],
+        name: ''
       },
       showViewer: false,
-      currentIndex: null,
+      currentIndex: 0
     };
     this.clickHandler = this.clickHandler.bind(this);
     this.buttonHandler = this.buttonHandler.bind(this);
@@ -31,7 +31,7 @@ class App extends React.Component {
   getPlace(id) {
     return axios.get(`/photos/?id=${id}`)
       .then((response) => {
-        this.setState({ place: response.data });
+        this.setState({ place: response.data }, () => console.log(this.state));
       })
       .catch(() => {});
   }
@@ -72,7 +72,7 @@ class App extends React.Component {
   advanceDisplay(string) {
     if (string === 'left' && this.state.currentIndex > 0) {
       this.setState({ currentIndex: this.state.currentIndex - 1 });
-    } else if (string === 'right' && this.state.currentIndex < this.state.place.urls.length - 1) {
+    } else if (string === 'right' && this.state.currentIndex < this.state.place.pics.length - 1) {
       this.setState({ currentIndex: this.state.currentIndex + 1 });
     }
   }
@@ -80,7 +80,10 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        <Gallery place={this.state.place} clickHandler={this.clickHandler} />
+        <Gallery
+          place={this.state.place}
+          clickHandler={this.clickHandler}
+        />
         <Viewer
           show={this.state.showViewer}
           place={this.state.place}
@@ -92,5 +95,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render(<App />, document.getElementById('app'));
 export default App;

@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Background = styled.div`
@@ -24,10 +23,10 @@ const CloseButton = styled.div`
   position: absolute;
 `;
 
-const Display = styled.div`
+const Scroller = styled.div`
   display: flex;
   flex-direction: row;
-  top: 40px;
+  top: 30px;
   z-index: 2;
   position: absolute;
   margin-left: 25%;
@@ -50,6 +49,12 @@ const InactiveArrow = styled.div`
   opacity: 0.2;
 `;
 
+const Display = styled.div`
+  display: flex;
+
+
+`;
+
 const Image = styled.div`
   flex: 4;
   user-select: none;
@@ -57,7 +62,7 @@ const Image = styled.div`
   margin: 22px;
 `;
 
-const Viewer = ({ show, place, currentIndex, buttonHandler }) => (
+const Viewer = ({ show = false, place, currentIndex, buttonHandler }) => (
   (show) ? (
     <div id="viewer-wrapper">
       <Background>
@@ -80,7 +85,7 @@ const Viewer = ({ show, place, currentIndex, buttonHandler }) => (
           src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/close_button.svg"
         />
       </CloseButton>
-      <Display>
+      <Scroller>
         {(currentIndex === 0) ? (
           <InactiveArrow>
             <img
@@ -110,10 +115,10 @@ const Viewer = ({ show, place, currentIndex, buttonHandler }) => (
             alt=""
             height="500"
             width="500"
-            src={place.urls[currentIndex]}
+            src={place.pics[currentIndex].url}
           />
         </Image>
-        {(currentIndex === place.urls.length - 1) ? (
+        {(currentIndex === place.pics.length - 1) ? (
           <InactiveArrow>
             <img
               id="inactive-right-arrow"
@@ -136,9 +141,33 @@ const Viewer = ({ show, place, currentIndex, buttonHandler }) => (
             />
           </Arrow>
         )}
-      </Display>
+      </Scroller>
     </div>
   ) : (null)
 );
+
+Viewer.propTypes = {
+  show: PropTypes.bool,
+  place: PropTypes.shape({
+    _id: PropTypes.number,
+    pics: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string,
+        username: PropTypes.string,
+        date: PropTypes.any
+      })
+    ),
+    name: PropTypes.string
+  }),
+  currentIndex: PropTypes.number,
+  buttonHandler: PropTypes.func
+};
+
+Viewer.defaultProps = {
+  show: false,
+  place: { _id: 0, name: 'test', pics: [] },
+  currentIndex: 1,
+  buttonHandler: () => {}
+};
 
 export default Viewer;

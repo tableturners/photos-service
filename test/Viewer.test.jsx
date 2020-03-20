@@ -8,7 +8,17 @@ configure({ adapter: new Adapter() });
 const testPlace = {
   _id: 0,
   name: 'test',
-  urls: ['test'],
+  pics: [
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' },
+    { url: '0', name: 'a', date: '0' }
+  ]
 };
 
 describe('Viewer lifecycle', () => {
@@ -18,7 +28,7 @@ describe('Viewer lifecycle', () => {
   });
 
   test('should render child components', () => {
-    const wrap = shallow(<Viewer show place={testPlace} />);
+    const wrap = shallow(<Viewer show place={testPlace} currentIndex={3} />);
     expect(wrap.find('#viewer-background')).toHaveLength(1);
     expect(wrap.find('#close-button')).toHaveLength(1);
     expect(wrap.find('#left-arrow')).toHaveLength(1);
@@ -28,9 +38,14 @@ describe('Viewer lifecycle', () => {
 });
 
 describe('Button handling', () => {
+  let wrap;
+  beforeEach(() => {
+    wrap = shallow(<Viewer show place={testPlace} currentIndex={3} />);
+  });
+
   test('buttons should call props.buttonHandler when clicked', () => {
     const mockFn = jest.fn();
-    const wrap = shallow(<Viewer show place={testPlace} buttonHandler={mockFn} />);
+    wrap.setProps({ buttonHandler: mockFn });
     wrap.find('#viewer-background').simulate('click');
     expect(mockFn).toHaveBeenCalledTimes(1);
     wrap.find('#close-button').simulate('click');
@@ -42,48 +57,51 @@ describe('Button handling', () => {
   });
 
   test('background should pass id to props.Buttonhandler when clicked', () => {
-    const mockFnBackground = (event) => expect(event.target.id).toBe('viewer-background');
-    const wrap = shallow(<Viewer show place={testPlace} buttonHandler={mockFnBackground} />);
+    wrap.setProps({ buttonHandler: (event) => expect(event.target.id).toBe('viewer-background') });
     wrap.find('#viewer-background').simulate('click', {
-      target: { id: 'viewer-background' },
+      target: { id: 'viewer-background' }
     });
   });
 
   test('close button should pass id to props.Buttonhandler when clicked', () => {
-    const mockFn = (event) => expect(event.target.id).toBe('close-button');
-    const wrap = shallow(<Viewer show place={testPlace} buttonHandler={mockFn} />);
+    wrap.setProps({ buttonHandler: (event) => expect(event.target.id).toBe('close-button') });
     wrap.find('#close-button').simulate('click', {
-      target: { id: 'close-button' },
+      target: { id: 'close-button' }
     });
   });
 
   test('left arrow should pass id to props.Buttonhandler when clicked', () => {
-    const mockFn = (event) => expect(event.target.id).toBe('left-arrow');
-    const wrap = shallow(<Viewer show place={testPlace} buttonHandler={mockFn} />);
+    wrap.setProps({ buttonHandler: (event) => expect(event.target.id).toBe('left-arrow') });
     wrap.find('#left-arrow').simulate('click', {
-      target: { id: 'left-arrow' },
+      target: { id: 'left-arrow' }
     });
   });
 
   test('buttons should pass id to props.Buttonhandler when clicked', () => {
-    const mockFn = (event) => expect(event.target.id).toBe('right-arrow');
-    const wrap = shallow(<Viewer show place={testPlace} buttonHandler={mockFn} />);
+    wrap.setProps({ buttonHandler: (event) => expect(event.target.id).toBe('right-arrow') });
     wrap.find('#right-arrow').simulate('click', {
-      target: { id: 'right-arrow' },
+      target: { id: 'right-arrow' }
     });
   });
 });
 
 describe('Arrow button state', () => {
+  let wrap;
+  beforeEach(() => {
+    wrap = shallow(<Viewer show place={testPlace} />);
+  });
+
   test('should return inactive left arrow when viewing first image', () => {
-    const wrap = shallow(<Viewer show place={testPlace} currentIndex={0} />);
-    expect(wrap.find('#inactive-left-arrow')).toHaveLength(1);
-    expect(wrap.find('#left-arrow')).toHaveLength(0);
+    wrap.setProps({ currentIndex: 0 }, () => {
+      expect(wrap.find('#inactive-left-arrow')).toHaveLength(1);
+      expect(wrap.find('#left-arrow')).toHaveLength(0);
+    });
   });
 
   test('should return inactive right arrow when viewing last image', () => {
-    const wrap = shallow(<Viewer show place={testPlace} currentIndex={testPlace.urls.length - 1} />);
-    expect(wrap.find('#inactive-right-arrow')).toHaveLength(1);
-    expect(wrap.find('#right-arrow')).toHaveLength(0);
+    wrap.setProps({ currentIndex: testPlace.pics.length - 1 }, () => {
+      expect(wrap.find('#inactive-right-arrow')).toHaveLength(1);
+      expect(wrap.find('#right-arrow')).toHaveLength(0);
+    });
   });
 });

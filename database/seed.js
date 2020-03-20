@@ -2,22 +2,22 @@ const faker = require('faker');
 const db = require('./index.js');
 
 const seedOne = (index) => {
-  const seed = [];
+  const seedPicsArray = [];
 
   for (let i = 0; i < 10; i++) {
-    seed.push(`https://eric-liu-turntable.s3-us-west-1.amazonaws.com/${index}_${i}`);
+    seedPicsArray.push({
+      url: `https://eric-liu-turntable.s3-us-west-1.amazonaws.com/${index}_${i}`,
+      username: faker.internet.userName(),
+      date: faker.date.past(5)
+    });
   }
 
   db.Place.create({
     _id: index,
     name: faker.commerce.productName(),
-    urls: seed,
+    pics: seedPicsArray,
   }, (err, success) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(success);
-    }
+    (err) ? console.log(err) : console.log(success);
   });
 };
 
