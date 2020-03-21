@@ -17,77 +17,45 @@ class App extends React.Component {
       showViewer: false,
       currentIndex: 0
     };
+    this.ViewerRef = React.createRef();
     this.clickHandler = this.clickHandler.bind(this);
-    this.buttonHandler = this.buttonHandler.bind(this);
   }
 
   // calls getPlace with random id in [0, 99], adds keydown listener
   componentDidMount() {
     this.getPlace(Math.floor(Math.random() * 100));
-    document.addEventListener('keydown', this.keypressHandler.bind(this));
   }
 
   // given input id, makes GET request to server and sets state.place equal to response
   getPlace(id) {
     return axios.get(`/photos/?id=${id}`)
       .then((response) => {
-        this.setState({ place: response.data }, () => console.log(this.state));
+        this.setState({ place: response.data });
       })
       .catch(() => {});
   }
 
-  // captures Gallery click events and opens Viewer
+  // captures Gallery click event and updates Viewer state
   clickHandler(event) {
-    this.setState({ showViewer: true, currentIndex: Number(event.target.id.split('-')[1]) });
-  }
-
-  // captures "button" image clicks in Viewer
-  buttonHandler(event) {
-    const eventId = event.target.id;
-    if (eventId === 'left-arrow') {
-      this.advanceDisplay('left');
-    } else if (eventId === 'right-arrow') {
-      this.advanceDisplay('right');
-    } else if (eventId === 'close-button') {
-      this.setState({ showViewer: false });
-    } else if (eventId === 'viewer-background') {
-      this.setState({ showViewer: false });
-    }
-  }
-
-  // captures key presses in Viewer
-  keypressHandler(event) {
-    if (this.state.showViewer) {
-      if (event.key === 'ArrowLeft') {
-        this.advanceDisplay('left');
-      } else if (event.key === 'ArrowRight') {
-        this.advanceDisplay('right');
-      } else if (event.key === 'Escape') {
-        this.setState({ showViewer: false });
-      }
-    }
-  }
-
-  // changes displayed image in Viewer based on button/key presses
-  advanceDisplay(string) {
-    if (string === 'left' && this.state.currentIndex > 0) {
-      this.setState({ currentIndex: this.state.currentIndex - 1 });
-    } else if (string === 'right' && this.state.currentIndex < this.state.place.pics.length - 1) {
-      this.setState({ currentIndex: this.state.currentIndex + 1 });
-    }
+    this.setState({
+      showViewer: true,
+      currentIndex: Number(event.target.id.split('-')[1])
+    }, () => this.ViewerRef.current.updateState(this.state));
   }
 
   render() {
+    const { place, showViewer, currentIndex } = this.state;
     return (
       <div id="container">
         <Gallery
-          place={this.state.place}
+          place={place}
           clickHandler={this.clickHandler}
         />
         <Viewer
-          show={this.state.showViewer}
-          place={this.state.place}
-          currentIndex={this.state.currentIndex}
+          ref={this.ViewerRef}
+          showViewer={showViewer}
+          place={place}
+          currentIndex={currentIndex}
           buttonHandler={this.buttonHandler}
         />
       </div>
@@ -95,5 +63,5 @@ class App extends React.Component {
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 export default App;
