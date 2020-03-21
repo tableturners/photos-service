@@ -36,6 +36,9 @@ describe('Viewer lifecycle', () => {
     expect(wrap.find('#left-arrow')).toHaveLength(1);
     expect(wrap.find('#viewer-image')).toHaveLength(1);
     expect(wrap.find('#right-arrow')).toHaveLength(1);
+    expect(wrap.find('#avatar-image')).toHaveLength(1);
+    expect(wrap.find('#image-info')).toHaveLength(1);
+    expect(wrap.find('#report-button')).toHaveLength(1);
   });
 });
 

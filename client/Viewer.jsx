@@ -246,7 +246,7 @@ class Viewer extends React.Component {
                 alt=""
                 src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/profile_picture.png"
               />
-              <ImageInfo>
+              <ImageInfo id="image-info">
                 <strong style={{ color: 'white' }}>
                   {`Taken by ${place.pics[currentIndex].username}`}
                 </strong>
