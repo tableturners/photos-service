@@ -5,10 +5,14 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
-  max-width: 660px;
-  max-height: 310px;
   margin: auto;
   user-select: none;
+  width: 663px;
+  height: 310px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 const SmallColumn = styled.div`
@@ -31,97 +35,120 @@ const LargeColumn = styled.div`
   display: block;
 `;
 
-const Picture = styled.img`
+const SmallPicture = styled.img`
   cursor: pointer;
   display: block;
+  width: 100px;
+  height: 100px;
   padding: 1px;
+  @media (max-width: 768px) {
+    width: 97.3%;
+    height: auto;
+    padding: 1px;
+  }
+`;
+
+const MediumPicture = styled.img`
+  cursor: pointer;
+  display: block;
+  width: 151px;
+  height: 151px;
+  padding: 1px;
+  @media (max-width: 768px) {
+    width: 98%;
+    height: auto;
+    padding: 1px;
+  }
+`;
+
+const LargePicture = styled.img`
+  cursor: pointer;
+  display: block;
+  width: 304px;
+  height: 304px;
+  padding: 1px;
+  @media (max-width: 768px) {
+    width: 98.7%;
+    height: auto;
+  }
 `;
 
 const Gallery = ({ place, clickHandler }) => (
   (place.pics.length) ? (
     <div id="gallery">
-      <h1 align="center">{place.name} - {place.pics.length} Photos</h1>
+      <h1
+        align="center"
+        style={{
+          fontSize: '24px',
+          fontFamily: 'Gill Sans',
+          fontWeight: '600'
+        }}
+      >
+        {`${place.name} - ${place.pics.length} Photos`}
+      </h1>
       <Wrapper id="gallery-wrapper">
         <MediumColumn id="medium-column">
-          <Picture
+          <MediumPicture
             id="picture-0"
             src={place.pics[0].url}
             alt={place.name}
-            height={150}
-            width={150}
             onClick={clickHandler}
           />
-          <Picture
+          <MediumPicture
             id="picture-1"
             src={place.pics[1].url}
             alt={place.name}
-            height={150}
-            width={150}
             onClick={clickHandler}
           />
         </MediumColumn>
 
         <LargeColumn id="large-column">
-          <Picture
+          <LargePicture
             id="picture-2"
             src={place.pics[2].url}
             alt={place.name}
-            height={300}
-            width={300}
             onClick={clickHandler}
           />
         </LargeColumn>
 
         <SmallColumn id="small-column-1">
-          <Picture
+          <SmallPicture
             id="picture-3"
             src={place.pics[3].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
-          <Picture
+          <SmallPicture
             id="picture-4"
             src={place.pics[4].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
-          <Picture
+          <SmallPicture
             id="picture-5"
             src={place.pics[5].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
         </SmallColumn>
 
         <SmallColumn id="small-column-2">
-          <Picture
+          <SmallPicture
             id="picture-6"
             src={place.pics[6].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
-          <Picture
+          <SmallPicture
             id="picture-7"
             src={place.pics[7].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
-          <Picture
+          <SmallPicture
             id="picture-8"
             src={place.pics[8].url}
             alt={place.name}
-            height={100}
-            width={100}
             onClick={clickHandler}
           />
         </SmallColumn>

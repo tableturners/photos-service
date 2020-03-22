@@ -44,24 +44,17 @@ class App extends React.Component {
   }
 
   render() {
-    const { place, showViewer, currentIndex } = this.state;
     return (
       <div id="container">
         <Gallery
-          place={place}
+          place={this.state.place}
           clickHandler={this.clickHandler}
         />
-        <Viewer
-          ref={this.ViewerRef}
-          showViewer={showViewer}
-          place={place}
-          currentIndex={currentIndex}
-          buttonHandler={this.buttonHandler}
-        />
+        <Viewer ref={this.ViewerRef} />
       </div>
     );
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 export default App;
