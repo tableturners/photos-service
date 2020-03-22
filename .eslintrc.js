@@ -29,6 +29,8 @@ module.exports = {
     "object-curly-newline": "off",
     "no-unused-expressions": "off",
     "no-plusplus": "off",
+    "import/extensions": "off",
+    "react/destructuring-assignment": "off",
 
   },
 };

@@ -6,7 +6,6 @@ class Viewer extends React.Component {
     super(props);
     this.state = {
       showViewer: undefined,
-      showReport: undefined,
       place: undefined,
       currentIndex: undefined
     };
@@ -65,7 +64,7 @@ class Viewer extends React.Component {
   }
 
   render() {
-    const { showViewer, showReport, place, currentIndex } = this.state;
+    const { showViewer, place, currentIndex } = this.state;
 
     const ViewerBackground = styled.img`
       height: 100%;
@@ -215,15 +214,6 @@ class Viewer extends React.Component {
             onClick={this.buttonHandler}
             src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/close_button.svg"
           />
-          {(showReport) ? (
-            <Report>
-              <ReportBackground
-                id="report-background"
-                alt=""
-                src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/report_background.jpg"
-              />
-            </Report>
-          ) : (null)}
           <Scroller id="viewer-scroller">
             {(currentIndex === 0) ? (
               <InactiveArrow
