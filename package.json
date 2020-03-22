@@ -38,6 +38,7 @@
     "jquery": "^3.4.1",
     "mongoose": "^5.9.4",
     "path": "^0.12.7",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1"
