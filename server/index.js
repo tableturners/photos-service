@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
+const cors = require('cors');
 const connectDb = require('../database/connection.js');
 const get = require('../database/Place.model.js').get;
 
 const app = express();
 const PORT = 3003;
 
-app.use(express.static(path.resolve(__dirname, '../public')));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(PORT, () => {
@@ -20,8 +20,4 @@ app.get('/api/photos/:id', (req, res) => {
   get({ _id: req.params.id }, (err, success) => {
     (err) ? console.log('err: ', err) : res.send(success);
   });
-});
-
-app.get('/', (req, res) => {
-  res.sendFile('../public/bundle.js');
 });

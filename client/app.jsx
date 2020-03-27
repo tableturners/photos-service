@@ -28,7 +28,7 @@ class App extends React.Component {
 
   // given input id, makes GET request to server and sets state.place equal to response
   getPlace(id) {
-    return axios.get(`/api/photos/${id}`)
+    return axios.get(`http://ec2-54-151-51-32.us-west-1.compute.amazonaws.com:3003/api/photos/${id}`)
       .then((response) => {
         this.setState({ place: response.data });
       })
