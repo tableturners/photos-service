@@ -1,5 +1,8 @@
 const faker = require('faker');
-const Place = require('./index.js').Place;
+const fs = require('fs');
+const path = require('path');
+
+const data = [];
 
 const seedOne = (index) => {
   const seedPicsArray = [];
@@ -12,15 +15,21 @@ const seedOne = (index) => {
     });
   }
 
-  Place.create({
-    _id: index,
-    name: faker.commerce.productName(),
-    pics: seedPicsArray,
-  }, (err, success) => {
-    (err) ? console.log(err) : console.log(success);
+  data.push({
+    '_id': index,
+    'name': faker.commerce.productName(),
+    'pics': seedPicsArray,
   });
 };
 
 for (let i = 0; i < 100; i++) { // restaurant id
   seedOne(i);
 }
+
+fs.writeFile(path.join(__dirname, 'seedData.json'), JSON.stringify(data), (err, success) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(success);
+  }
+});

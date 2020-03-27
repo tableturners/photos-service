@@ -28,7 +28,6 @@ class Viewer extends React.Component {
   // captures "button" image clicks in Viewer
   buttonHandler(event) {
     const eventId = event.target.id;
-    console.log(event.target.id);
     if (eventId === 'left-arrow') {
       this.advanceDisplay('left');
     } else if (eventId === 'right-arrow') {

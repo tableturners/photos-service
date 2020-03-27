@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../database/index.js');
+const connectDb = require('../database/connection.js');
+const get = require('../database/Place.model.js').get;
 
 const app = express();
 const PORT = 3003;
@@ -9,10 +10,18 @@ const PORT = 3003;
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}.`));
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}.`);
 
-app.get('/photos', (req, res) => {
-  db.get({ _id: req.query.id }, (err, success) => {
+  connectDb().then(() => console.log("MongoDB connected."))
+});
+
+app.get('/api/photos/:id', (req, res) => {
+  get({ _id: req.params.id }, (err, success) => {
     (err) ? console.log('err: ', err) : res.send(success);
   });
+});
+
+app.get('/', (req, res) => {
+  res.sendFile('../public/bundle.js');
 });

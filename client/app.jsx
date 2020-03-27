@@ -28,7 +28,7 @@ class App extends React.Component {
 
   // given input id, makes GET request to server and sets state.place equal to response
   getPlace(id) {
-    return axios.get(`/photos/?id=${id}`)
+    return axios.get(`/api/photos/${id}`)
       .then((response) => {
         this.setState({ place: response.data });
       })
@@ -56,5 +56,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('photos'));
 export default App;
