@@ -1,6 +1,116 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const ViewerBackground = styled.img`
+height: 100%;
+width: 100%;
+z-index: 1;
+top: 0;
+left: 0;
+position: absolute;
+user-select: none;
+opacity: 0.95;
+`;
+
+const CloseButton = styled.img`
+top: 40px;
+right: 35px;
+height: 20px;
+width: 20px;
+z-index: 2;
+user-select: none;
+opacity: 0.3;
+cursor: pointer;
+position: absolute;
+`;
+
+// Holds Display and Arrows
+const Scroller = styled.div`
+display: flex;
+flex-direction: row;
+top: 30px;
+z-index: 2;
+position: absolute;
+margin-left: 22%;
+width: 50%;
+height: auto;
+align-items: center;
+`;
+
+// Holds Image and InfoBar
+const Display = styled.div`
+display: flex;
+flex-direction: column;
+flex: 16;
+`;
+
+const Arrow = styled.img`
+height: 40px;
+width: auto;
+flex: 1;
+user-select: none;
+opacity: 0.6;
+cursor: pointer;
+&:hover {
+  opacity: 0.4;
+}
+`;
+
+const InactiveArrow = styled.img`
+height: 40px;
+width: auto;
+flex: 1;
+user-select: none;
+opacity: 0.2;
+`;
+
+const Image = styled.img`
+flex: 16;
+user-select: none;
+padding-left: 40px;
+padding-right: 40px;
+padding-bottom: 10px;
+width: 500px;
+@media (max-width: 992px) {
+  width: 350px;
+}
+@media (max-width: 768px) {
+  width: 250px;
+}
+`;
+
+// Holds Avatar, ImageInfo, and Flag
+const InfoBar = styled.div`
+padding-top: 10px;
+flex: 4;
+display: flex;
+flex-direction: row;
+`;
+
+const Avatar = styled.img`
+height: 50px;
+width: 50px;
+display: block;
+user-select: none;
+`;
+
+// Holds Username and Date
+const ImageInfo = styled.div`
+flex: 4;
+display: flex;
+flex-direction: column;
+padding-left: 15px;
+`;
+
+const Flag = styled.img`
+height: 26px;
+width: 26px;
+display: block;
+user-select: none;
+cursor: pointer;
+padding-top: 5px;
+`;
+
 class Viewer extends React.Component {
   constructor(props) {
     super(props);
@@ -64,116 +174,6 @@ class Viewer extends React.Component {
 
   render() {
     const { showViewer, place, currentIndex } = this.state;
-
-    const ViewerBackground = styled.img`
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      position: absolute;
-      user-select: none;
-      opacity: 0.95;
-  `;
-
-    const CloseButton = styled.img`
-      top: 40px;
-      right: 35px;
-      height: 20px;
-      width: 20px;
-      z-index: 2;
-      user-select: none;
-      opacity: 0.3;
-      cursor: pointer;
-      position: absolute;
-  `;
-
-    // Holds Display and Arrows
-    const Scroller = styled.div`
-      display: flex;
-      flex-direction: row;
-      top: 30px;
-      z-index: 2;
-      position: absolute;
-      margin-left: 22%;
-      width: 50%;
-      height: auto;
-      align-items: center;
-  `;
-
-    // Holds Image and InfoBar
-    const Display = styled.div`
-      display: flex;
-      flex-direction: column;
-      flex: 16;
-  `;
-
-    const Arrow = styled.img`
-      height: 40px;
-      width: auto;
-      flex: 1;
-      user-select: none;
-      opacity: 0.6;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.4;
-      }
-  `;
-
-    const InactiveArrow = styled.img`
-      height: 40px;
-      width: auto;
-      flex: 1;
-      user-select: none;
-      opacity: 0.2;
-  `;
-
-    const Image = styled.img`
-      flex: 16;
-      user-select: none;
-      padding-left: 40px;
-      padding-right: 40px;
-      padding-bottom: 10px;
-      width: 500px;
-      @media (max-width: 992px) {
-        width: 350px;
-      }
-      @media (max-width: 768px) {
-        width: 250px;
-      }
-  `;
-
-    // Holds Avatar, ImageInfo, and Flag
-    const InfoBar = styled.div`
-      padding-top: 10px;
-      flex: 4;
-      display: flex;
-      flex-direction: row;
-  `;
-
-    const Avatar = styled.img`
-      height: 50px;
-      width: 50px;
-      display: block;
-      user-select: none;
-  `;
-
-    // Holds Username and Date
-    const ImageInfo = styled.div`
-      flex: 4;
-      display: flex;
-      flex-direction: column;
-      padding-left: 15px;
-  `;
-
-    const Flag = styled.img`
-      height: 26px;
-      width: 26px;
-      display: block;
-      user-select: none;
-      cursor: pointer;
-      padding-top: 5px;
-  `;
 
     const DateToString = (ISOstring) => {
       const date = ISOstring.split('T')[0].split('-');
@@ -239,7 +239,7 @@ class Viewer extends React.Component {
                 <Avatar
                   id="avatar-image"
                   alt=""
-                  src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/profile_picture.png"
+                  src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/profile_picture.png"
                 />
                 <ImageInfo id="image-info">
                   <strong
@@ -268,7 +268,7 @@ class Viewer extends React.Component {
                 <Flag
                   id="report-button"
                   alt=""
-                  src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/flag.png"
+                  src="https://eric-liu-turntable.s3-us-west-1.amazonaws.com/viewer/flag.png"
                 />
               </InfoBar>
             </Display>
